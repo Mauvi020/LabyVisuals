@@ -1,9 +1,0 @@
-{
-  "namespace": "labyvisuals",
-  "version": "1.0.0",
-  "name": "LabyVisuals",
-  "description": "Advanced visual enhancements: TargetHUD, Damage Numbers, Hit Particles & Trajectories.",
-  "author": "Mauvi",
-  "mainClass": "net.labymod.addons.labyvisuals.LabyVisualsAddon",
-  "icon": "assets/labyvisuals/icon.png"
-}

@@ -1,0 +1,71 @@
+{
+  "labyvisuals": {
+    "addon": {
+      "name": "LabyVisuals",
+      "description": "Advanced visual enhancements: TargetHUD, Damage Numbers, Hit Particles & Trajectories."
+    },
+    "settings": {
+      "header": {
+        "features": {
+          "name": "Features"
+        },
+        "menu": {
+          "name": "Menu"
+        }
+      },
+      "enabled": {
+        "name": "Enabled"
+      },
+      "targetHud": {
+        "name": "Target HUD",
+        "description": "Shows the entity you are currently looking at, including its health."
+      },
+      "damageNumbers": {
+        "name": "Damage Numbers",
+        "description": "Shows floating damage numbers when hitting entities."
+      },
+      "hitParticles": {
+        "name": "Hit Particles",
+        "description": "Adds extra hit particles to your attacks."
+      },
+      "trajectories": {
+        "name": "Trajectories",
+        "description": "Renders the flight trajectory of throwable items."
+      },
+      "menuKeybind": {
+        "name": "Visuals Menu",
+        "description": "Opens the LabyVisuals menu. Click on this setting and press the key you want to bind it to."
+      }
+    },
+    "hud": {
+      "targethud": {
+        "name": "LabyVisuals Target HUD"
+      },
+      "damagehud": {
+        "name": "LabyVisuals Last Hit",
+        "lastHit": "Last Hit"
+      }
+    },
+    "activity": {
+      "title": "LabyVisuals",
+      "subtitle": "Quick toggles - full settings: LabyMod settings > LabyVisuals",
+      "close": "Close",
+      "targethud": {
+        "enabled": "Target HUD: enabled",
+        "disabled": "Target HUD: disabled"
+      },
+      "damageNumbers": {
+        "enabled": "Damage Numbers: enabled",
+        "disabled": "Damage Numbers: disabled"
+      },
+      "hitParticles": {
+        "enabled": "Hit Particles: enabled",
+        "disabled": "Hit Particles: disabled"
+      },
+      "trajectories": {
+        "enabled": "Trajectories: enabled",
+        "disabled": "Trajectories: disabled"
+      }
+    }
+  }
+}
