@@ -43,6 +43,11 @@ public class VisualsActivity extends SimpleActivity {
     this.container.addId("container");
     this.container.addChild(this.createToggle("targethud"));
     this.container.addChild(this.createToggle("damageNumbers"));
+    this.container.addChild(this.createToggle("hitMarker"));
+    this.container.addChild(this.createToggle("comboCounter"));
+    this.container.addChild(this.createToggle("damageStats"));
+    this.container.addChild(this.createToggle("lowHealthVignette"));
+    this.container.addChild(this.createToggle("inventoryHud"));
     this.container.addChild(this.createToggle("hitParticles"));
     this.container.addChild(this.createToggle("trajectories"));
     this.container.addChild(this.createCloseButton());
@@ -90,6 +95,16 @@ public class VisualsActivity extends SimpleActivity {
         return configuration.hitParticles().get();
       case "trajectories":
         return configuration.trajectories().get();
+      case "hitMarker":
+        return configuration.hitMarker().get();
+      case "comboCounter":
+        return configuration.comboCounter().get();
+      case "damageStats":
+        return configuration.damageStats().get();
+      case "lowHealthVignette":
+        return configuration.lowHealthVignette().get();
+      case "inventoryHud":
+        return configuration.inventoryHud().get();
       default:
         return false;
     }
@@ -109,6 +124,21 @@ public class VisualsActivity extends SimpleActivity {
         break;
       case "trajectories":
         configuration.trajectories().set(value);
+        break;
+      case "hitMarker":
+        configuration.hitMarker().set(value);
+        break;
+      case "comboCounter":
+        configuration.comboCounter().set(value);
+        break;
+      case "damageStats":
+        configuration.damageStats().set(value);
+        break;
+      case "lowHealthVignette":
+        configuration.lowHealthVignette().set(value);
+        break;
+      case "inventoryHud":
+        configuration.inventoryHud().set(value);
         break;
       default:
         break;

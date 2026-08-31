@@ -3,25 +3,32 @@ package net.labymod.addons.labyvisuals.hud;
 import net.labymod.addons.labyvisuals.LabyVisualsAddon;
 import net.labymod.addons.labyvisuals.LabyVisualsConfiguration;
 import net.labymod.api.Laby;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.TextColor;
+import net.labymod.api.client.component.serializer.plain.PlainTextComponentSerializer;
 import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.LivingEntity;
 import net.labymod.api.client.entity.player.ClientPlayer;
 import net.labymod.api.client.gui.hud.hudwidget.text.TextHudWidget;
 import net.labymod.api.client.gui.hud.hudwidget.text.TextHudWidgetConfig;
 import net.labymod.api.client.gui.hud.hudwidget.text.TextLine;
-import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.serializer.plain.PlainTextComponentSerializer;
 import net.labymod.api.client.world.phys.hit.EntityHitResult;
 import net.labymod.api.client.world.phys.hit.HitResult;
 
 /**
- * Target HUD widget: shows the entity the player is currently looking at,
- * including its remaining health. Rendered via the LabyMod widget editor
- * (category "LabyVisuals").
+ * Target HUD widget: shows the entity the player is currently looking at
+ * with a health-based colored name and its remaining health.
+ * Rendered via the LabyMod widget editor (category "LabyVisuals").
  */
 public class TargetHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
-  private TextLine targetLine;
+  private static final int COLOR_HEALTHY = 0xFF63D66E;
+  private static final int COLOR_HURT = 0xFFFFD35E;
+  private static final int COLOR_CRITICAL = 0xFFE06C5E;
+  private static final int COLOR_TEXT = 0xFFF2F2F2;
+
+  private TextLine nameLine;
+  private TextLine healthLine;
 
   public TargetHudWidget(LabyVisualsAddon addon) {
     super("targethud");
@@ -31,29 +38,44 @@ public class TargetHudWidget extends TextHudWidget<TextHudWidgetConfig> {
   @Override
   public void load(TextHudWidgetConfig config) {
     super.load(config);
-    this.targetLine = this.createLine("Target:", "");
+    this.nameLine = this.createLine("Target:", "");
+    this.healthLine = this.createLine("\u2764", "");
   }
 
   @Override
   public void onTick(boolean isEditorContext) {
-    String target;
+    String name;
+    float health;
+    float maxHealth;
+
     if (isEditorContext) {
       // Preview value inside the widget editor
-      target = "Steve";
+      name = "Steve";
+      health = 7.0F;
+      maxHealth = 20.0F;
     } else {
-      target = this.resolveTarget();
+      LivingEntity target = this.resolveTarget();
+      if (target == null) {
+        this.nameLine.setState(TextLine.State.HIDDEN);
+        this.healthLine.setState(TextLine.State.HIDDEN);
+        return;
+      }
+      name = this.entityName(target);
+      health = Math.max(0.0F, target.getHealth());
+      maxHealth = Math.max(health, target.getMaximalHealth());
     }
 
-    if (target == null) {
-      this.targetLine.setState(TextLine.State.HIDDEN);
-      return;
-    }
+    float ratio = maxHealth > 0.0F ? health / maxHealth : 1.0F;
+    int nameColor = ratio > 0.7F ? COLOR_HEALTHY : ratio > 0.3F ? COLOR_HURT : COLOR_CRITICAL;
 
-    this.targetLine.updateAndFlush(target);
-    this.targetLine.setState(TextLine.State.VISIBLE);
+    this.nameLine.updateAndFlush(Component.text(name, TextColor.color(nameColor)));
+    this.nameLine.setState(TextLine.State.VISIBLE);
+    this.healthLine.updateAndFlush(Component.text(
+        String.format("%.1f/%.0f", health, maxHealth), TextColor.color(COLOR_TEXT)));
+    this.healthLine.setState(TextLine.State.VISIBLE);
   }
 
-  private String resolveTarget() {
+  private LivingEntity resolveTarget() {
     LabyVisualsAddon addon = LabyVisualsAddon.get();
     LabyVisualsConfiguration configuration = addon != null ? addon.config() : null;
     if (configuration == null || !configuration.targetHud().get()) {
@@ -73,18 +95,11 @@ public class TargetHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     }
 
     Entity entity = ((EntityHitResult) hitResult).getEntity();
-    if (entity == null || entity.equals(player)) {
+    if (entity == null || entity.equals(player) || !(entity instanceof LivingEntity)) {
       return null;
     }
 
-    if (entity instanceof LivingEntity) {
-      LivingEntity living = (LivingEntity) entity;
-      int health = Math.max(0, (int) Math.ceil(living.getHealth()));
-      int maxHealth = Math.max(health, (int) Math.ceil(living.getMaximalHealth()));
-      return this.entityName(entity) + " " + health + "/" + maxHealth;
-    }
-
-    return this.entityName(entity);
+    return (LivingEntity) entity;
   }
 
   private String entityName(Entity entity) {

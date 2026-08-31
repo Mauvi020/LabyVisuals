@@ -2,12 +2,18 @@
   "labyvisuals": {
     "addon": {
       "name": "LabyVisuals",
-      "description": "Advanced visual enhancements: TargetHUD, Damage Numbers, Hit Particles & Trajectories."
+      "description": "Advanced visual enhancements: TargetHUD, Damage Numbers, Inventory HUD, Hit Marker, Combo Counter & more."
     },
     "settings": {
       "header": {
         "features": {
           "name": "Features"
+        },
+        "combat": {
+          "name": "Combat"
+        },
+        "inventory": {
+          "name": "Inventory"
         },
         "menu": {
           "name": "Menu"
@@ -22,7 +28,7 @@
       },
       "damageNumbers": {
         "name": "Damage Numbers",
-        "description": "Shows floating damage numbers when hitting entities."
+        "description": "Shows your last measured damage as a HUD line."
       },
       "hitParticles": {
         "name": "Hit Particles",
@@ -31,6 +37,62 @@
       "trajectories": {
         "name": "Trajectories",
         "description": "Renders the flight trajectory of throwable items."
+      },
+      "hitMarker": {
+        "name": "Hit Marker",
+        "description": "Shows a small cross at the widget position whenever you land a hit. Turns into the kill color on lethal hits. Place the widget near your crosshair."
+      },
+      "hitMarkerScale": {
+        "name": "Hit Marker Size",
+        "description": "Size of the hit marker cross."
+      },
+      "hitMarkerColor": {
+        "name": "Hit Marker Color",
+        "description": "Color of the hit marker for normal hits."
+      },
+      "hitMarkerKillColor": {
+        "name": "Kill Color",
+        "description": "Color of the hit marker when your hit kills the target."
+      },
+      "comboCounter": {
+        "name": "Combo Counter",
+        "description": "Counts your hits in a row. Resets when you take damage or stop hitting."
+      },
+      "damageStats": {
+        "name": "Damage Stats",
+        "description": "Shows your damage per second with an activity bar."
+      },
+      "dpsWindow": {
+        "name": "DPS Window",
+        "description": "Seconds used to calculate the DPS value."
+      },
+      "statsShowTotal": {
+        "name": "Show Total",
+        "description": "Shows the total damage dealt in this session."
+      },
+      "lowHealthVignette": {
+        "name": "Low Health Vignette",
+        "description": "Shows a pulsing colored border while you are below the configured hearts. Scale up the widget to cover the screen."
+      },
+      "lowHealthThreshold": {
+        "name": "Low Health Threshold",
+        "description": "Hearts below which the vignette appears."
+      },
+      "lowHealthColor": {
+        "name": "Vignette Color",
+        "description": "Color of the low health vignette."
+      },
+      "inventoryHud": {
+        "name": "Inventory HUD",
+        "description": "Shows a live preview of your inventory as a widget."
+      },
+      "inventoryShowArmor": {
+        "name": "Show Armor",
+        "description": "Adds a column with your equipped armor next to the inventory."
+      },
+      "inventoryShowCounts": {
+        "name": "Show Item Counts",
+        "description": "Shows the stack size on your items."
       },
       "menuKeybind": {
         "name": "Visuals Menu",
@@ -44,6 +106,22 @@
       "damagehud": {
         "name": "LabyVisuals Last Hit",
         "lastHit": "Last Hit"
+      },
+      "inventoryhud": {
+        "name": "LabyVisuals Inventory"
+      },
+      "hitmarker": {
+        "name": "LabyVisuals Hit Marker"
+      },
+      "combocounter": {
+        "name": "LabyVisuals Combo Counter",
+        "label": "Combo"
+      },
+      "damagestats": {
+        "name": "LabyVisuals Damage Stats"
+      },
+      "lowhealthvignette": {
+        "name": "LabyVisuals Low Health"
       }
     },
     "activity": {
@@ -65,6 +143,26 @@
       "trajectories": {
         "enabled": "Trajectories: enabled",
         "disabled": "Trajectories: disabled"
+      },
+      "hitMarker": {
+        "enabled": "Hit Marker: enabled",
+        "disabled": "Hit Marker: disabled"
+      },
+      "comboCounter": {
+        "enabled": "Combo Counter: enabled",
+        "disabled": "Combo Counter: disabled"
+      },
+      "damageStats": {
+        "enabled": "Damage Stats: enabled",
+        "disabled": "Damage Stats: disabled"
+      },
+      "lowHealthVignette": {
+        "enabled": "Low Health: enabled",
+        "disabled": "Low Health: disabled"
+      },
+      "inventoryHud": {
+        "enabled": "Inventory HUD: enabled",
+        "disabled": "Inventory HUD: disabled"
       }
     }
   }
