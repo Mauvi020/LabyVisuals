@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.pulse.visuals.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "WorldRendererMixin"
+  ],
+  "client": [
+    "ClientPlayerInteractionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

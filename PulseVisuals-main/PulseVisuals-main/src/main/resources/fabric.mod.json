@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pulsevisuals",
+  "version": "${version}",
+  "name": "Pulse Visuals",
+  "description": "PvP visual effects mod for Minecraft - adds hit particles, target HUD, damage indicators, critical effects, and trajectory prediction",
+  "authors": [
+    "Your Name"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Lopata12958/PulseVisuals",
+    "sources": "https://github.com/Lopata12958/PulseVisuals"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.pulse.visuals.PulseVisualsClient"
+    ]
+  },
+  "mixins": [
+    "pulsevisuals.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.4",
+    "java": ">=21"
+  }
+}
