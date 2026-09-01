@@ -18,7 +18,9 @@ import net.labymod.api.util.I18n;
 public class DamageNumberHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
   private static final int COLOR_LABEL = 0xFFA6A6B0;
-  private static final int COLOR_DAMAGE = 0xFFE06C5E;
+  private static final int COLOR_DAMAGE_LOW = 0xFF55FF55;   // Grün für geringen Schaden
+  private static final int COLOR_DAMAGE_MED = 0xFFFFAA00;   // Orange für mittleren Schaden
+  private static final int COLOR_DAMAGE_HIGH = 0xFFFF5555;  // Rot für hohen Schaden
 
   private final DamageNumberTracker tracker;
   private TextLine lastHitLine;
@@ -41,7 +43,8 @@ public class DamageNumberHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     Component value = null;
 
     if (isEditorContext) {
-      value = this.buildValue("Steve", 3.5F);
+      // Preview value inside the widget editor: show a damage hit on a mob
+      value = this.buildValue("Slime", 4.2F);
     } else if (this.tracker.enabled()) {
       java.util.List<DamageNumber> active = this.tracker.active();
       if (!active.isEmpty()) {
@@ -60,8 +63,18 @@ public class DamageNumberHudWidget extends TextHudWidget<TextHudWidgetConfig> {
   }
 
   private Component buildValue(String target, float damage) {
+    // Color damage by magnitude: green (low) -> orange (med) -> red (high)
+    int damageColor;
+    if (damage >= 6.0F) {
+      damageColor = COLOR_DAMAGE_HIGH;
+    } else if (damage >= 3.0F) {
+      damageColor = COLOR_DAMAGE_MED;
+    } else {
+      damageColor = COLOR_DAMAGE_LOW;
+    }
+
     return Component.text(target + ": ", TextColor.color(COLOR_LABEL))
         .append(Component.text(String.format("%.1f \u2764", damage),
-            TextColor.color(COLOR_DAMAGE)));
+            TextColor.color(damageColor)));
   }
 }
