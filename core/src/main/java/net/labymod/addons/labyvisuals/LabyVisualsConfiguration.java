@@ -81,8 +81,11 @@ public class LabyVisualsConfiguration extends AddonConfig {
   @SwitchSetting
   private final ConfigProperty<Boolean> inventoryShowArmor = new ConfigProperty<>(true);
 
-  @SwitchSetting
+    @SwitchSetting
   private final ConfigProperty<Boolean> inventoryShowCounts = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> simplifiedEntityNames = new ConfigProperty<>(true);
 
   @SettingSection("menu")
 
@@ -164,6 +167,10 @@ public class LabyVisualsConfiguration extends AddonConfig {
 
   public ConfigProperty<Boolean> inventoryShowCounts() {
     return this.inventoryShowCounts;
+  }
+
+  public ConfigProperty<Boolean> simplifiedEntityNames() {
+    return this.simplifiedEntityNames;
   }
 
   public ConfigProperty<Key> menuKeybind() {

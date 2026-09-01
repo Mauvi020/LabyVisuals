@@ -94,6 +94,10 @@
         "name": "Show Item Counts",
         "description": "Shows the stack size on your items."
       },
+      "simplifiedEntityNames": {
+        "name": "Simplified Entity Names",
+        "description": "Shows simplified names for entities (e.g. 'slime' instead of 'entity.minecraft.slime')."
+      },
       "menuKeybind": {
         "name": "Visuals Menu",
         "description": "Opens the LabyVisuals menu. Click on this setting and press the key you want to bind it to."

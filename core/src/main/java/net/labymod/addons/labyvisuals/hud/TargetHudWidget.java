@@ -48,9 +48,9 @@ public class TargetHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     float health;
     float maxHealth;
 
-    if (isEditorContext) {
-      // Preview value inside the widget editor
-      name = "Steve";
+        if (isEditorContext) {
+      // Preview value inside the widget editor: show a hostile mob example
+      name = "Slime";
       health = 7.0F;
       maxHealth = 20.0F;
     } else {
@@ -107,6 +107,18 @@ public class TargetHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     if (nameComponent == null) {
       return "Unknown";
     }
-    return PlainTextComponentSerializer.plainText().serialize(nameComponent);
+    String name = PlainTextComponentSerializer.plainText().serialize(nameComponent);
+
+    // Simplify technical names like "entity.minecraft.slime" to "slime"
+    LabyVisualsConfiguration config = LabyVisualsAddon.get().config();
+    if (config != null && config.simplifiedEntityNames().get()) {
+      if (name.contains("entity.minecraft.")) {
+        int lastDot = name.lastIndexOf('.');
+        if (lastDot >= 0 && lastDot < name.length() - 1) {
+          name = name.substring(lastDot + 1);
+        }
+      }
+    }
+    return name;
   }
 }
